@@ -1,0 +1,40 @@
+{
+  "name": "first-node-app",
+  "version": "1.0.0",
+  "description": "my first nodejs express app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@api/coinstatsopenapi": "file:.api/apis/coinstatsopenapi",
+    "@sendgrid/mail": "^7.7.0",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "csvtojson": "^2.0.10",
+    "cyrillic-to-latin": "^2.0.0",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mailjet-sendemail": "^1.1.4",
+    "mongoosastic": "^5.0.0",
+    "mongoose": "^6.12.6",
+    "mongoose-delete": "^1.0.2",
+    "mongoose-paginate-v2": "^1.7.0",
+    "multer": "^1.4.5-lts.1",
+    "node-mailjet": "^6.0.5",
+    "nodemailer": "^6.9.2",
+    "nodemailer-sendgrid": "^1.0.3",
+    "request-json": "^0.6.5",
+    "tslib": "^2.6.2"
+  },
+  "engines": {
+    "node": "18.13.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
