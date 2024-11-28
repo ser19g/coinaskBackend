@@ -47,9 +47,9 @@ const { Console } = require("console");
 // }
 // filter 1156
 
-// app.get("/", async (req, res) => {
-//   res.sendFile(__dirname + "/main.html");
-// });
+app.get("/", async (req, res) => {
+  res.sendFile(__dirname + "/main.html");
+});
 
 // serve your css as static
 app.use(express.static(__dirname));
