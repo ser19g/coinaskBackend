@@ -72,52 +72,52 @@ app.get("/delete_data", async (req, res) => {
   // });
 });
 //////////////////////////////////send mail/////////////////////////////////////////////////////////////////////////////
-app.post("/send-mailjet", async (req, res) => {
-  try {
-      const response = await mailjetService.sendMail(req, res);
-      res.status(200).json({
-          status: "success",
-          message: "Email sent successfully",
-          data: response,
-      });
-  } catch (error) {
-      res.status(400).json({
-          status: "error",
-          message: "Email not sent",
-      });
-  }
-});
-app.post("/get-mailjet", async (req, res) => {
-  try {
-      const response = await mailjetService.getMail(req, res);
-      res.status(200).json({
-          status: "success",
-          message: "Email sent successfully",
-          data: response,
-      });
-  } catch (error) {
-      res.status(400).json({
-          status: "error",
-          message: "Email not sent",
-      });
-  }
-});
-app.post("/send-message-mailjet", async (req, res) => {
-  console.log(req)
-  try {
-      const response = await mailjetService.sendMessageMail(req, res);
-      res.status(200).json({
-          status: "success",
-          message: "Email sent successfully",
-          data: response,
-      });
-  } catch (error) {
-      res.status(400).json({
-          status: "error",
-          message: "Email not sent",
-      });
-  }
-});
+// app.post("/send-mailjet", async (req, res) => {
+//   try {
+//       const response = await mailjetService.sendMail(req, res);
+//       res.status(200).json({
+//           status: "success",
+//           message: "Email sent successfully",
+//           data: response,
+//       });
+//   } catch (error) {
+//       res.status(400).json({
+//           status: "error",
+//           message: "Email not sent",
+//       });
+//   }
+// });
+// app.post("/get-mailjet", async (req, res) => {
+//   try {
+//       const response = await mailjetService.getMail(req, res);
+//       res.status(200).json({
+//           status: "success",
+//           message: "Email sent successfully",
+//           data: response,
+//       });
+//   } catch (error) {
+//       res.status(400).json({
+//           status: "error",
+//           message: "Email not sent",
+//       });
+//   }
+// });
+// app.post("/send-message-mailjet", async (req, res) => {
+//   console.log(req)
+//   try {
+//       const response = await mailjetService.sendMessageMail(req, res);
+//       res.status(200).json({
+//           status: "success",
+//           message: "Email sent successfully",
+//           data: response,
+//       });
+//   } catch (error) {
+//       res.status(400).json({
+//           status: "error",
+//           message: "Email not sent",
+//       });
+//   }
+// });
 //////////////////////////////////Actors//////////////////////////////////////////////////////////////////////////////////
 
 app.post("/add_Actors", async (request, response) => {
