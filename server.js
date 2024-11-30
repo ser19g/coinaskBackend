@@ -4,8 +4,15 @@ const mongoose = require("mongoose");
 const Router = require("./routes");
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+const rateLimit = require("express-rate-limit");
 const app = express();
+
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 100,
+});
+
+app.use(limiter);
 
 let port = process.env.PORT;
 

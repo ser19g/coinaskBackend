@@ -26,6 +26,7 @@ const TopLearnModel = require("./models/modelTopLearn");
 const PopularNewsModel = require("./models/modelPopularNews");
 const DescriptionCoinModel = require("./models/modelDescriptionCoin");
 const MessageModel = require("./models/modelMessage");
+const EmailModel = require("./models/modelEmailSubscribe");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const mailjetService = require("./mailjetService")
 var mongoose_delete = require('mongoose-delete');
@@ -258,8 +259,9 @@ app.post("/add_BitcoinNews", async (request, response) => {
   }
 });
 app.get("/get_BitcoinNews", async (request, response) => {
-  let limit = request.query.limit
+  
   try {
+    let limit = request.query.limit
     const category = await BitcoinModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
@@ -385,8 +387,6 @@ app.post("/add_EthereumNews", async (request, response) => {
   }
 });
 app.get("/get_EthereumNews", async (request, response) => {
-  
-
   try {
     let limit = request.query.limit
     const category = await EthereumModel.find({}).limit(limit).sort({ createdAt: -1 });;
@@ -501,10 +501,9 @@ app.get("/get_BlockchainNews/:slug", async (request, response) => {
   }
 });
 app.get("/get_BlockchainNews/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await BlockchainModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await BlockchainModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -585,10 +584,9 @@ app.post("/add_DefiNews", async (request, response) => {
   }
 });
 app.get("/get_DefiNews", async (request, response) => {
-  let limit = request.query.limit
-  const category = await DefiModel.find({}).limit(limit).sort({ createdAt: -1 });
-
   try {
+    let limit = request.query.limit
+    const category = await DefiModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
@@ -606,10 +604,9 @@ app.get("/get_DefiNews/:slug", async (request, response) => {
   }
 });
 app.get("/get_DefiNews/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await DefiModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await DefiModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -690,17 +687,15 @@ app.post("/add_AltcoinNews", async (request, response) => {
   }
 });
 app.get("/get_AltcoinNews", async (request, response) => {
-  let limit = request.query.limit
-  const category = await AltcoinModel.find({}).limit(limit).sort({ createdAt: -1 });
-
   try {
+    let limit = request.query.limit
+    const category = await AltcoinModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_AltcoinNews/:slug", async (request, response) => {
-  
   try {
     const { slug } = request.params;
     const data = await AltcoinModel.findOne({slug:slug});
@@ -711,10 +706,9 @@ app.get("/get_AltcoinNews/:slug", async (request, response) => {
   }
 });
 app.get("/get_AltcoinNews/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await AltcoinModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await AltcoinModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -795,31 +789,27 @@ app.post("/add_NftNews", async (request, response) => {
   }
 });
 app.get("/get_NftNews", async (request, response) => {
-  let limit = request.query.limit
-   const category = await NftModel.find({}).limit(limit).sort({ createdAt: -1 });
-console.log('nft')
   try {
+    let limit = request.query.limit
+    const category = await NftModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_NftNews/:slug", async (request, response) => {
-  
   try {
     const { slug } = request.params;
     const data = await NftModel.findOne({slug:slug});
-    console.log(data)
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_NftNews/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await NftModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await NftModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -900,10 +890,9 @@ app.post("/add_RegulationNews", async (request, response) => {
   }
 });
 app.get("/get_RegulationNews", async (request, response) => {
-  let limit = request.query.limit
-  const category = await RegulationModel.find({}).limit(limit).sort({ createdAt: -1 });
-
   try {
+    let limit = request.query.limit
+    const category = await RegulationModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
@@ -914,17 +903,15 @@ app.get("/get_RegulationNews/:slug", async (request, response) => {
   try {
     const { slug } = request.params;
     const data = await RegulationModel.findOne({slug:slug});
-    console.log(data)
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_RegulationNews/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await RegulationModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await RegulationModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1005,10 +992,9 @@ app.post("/add_MetaverseNews", async (request, response) => {
   }
 });
 app.get("/get_MetaverseNews", async (request, response) => {
-  let limit = request.query.limit
-  const category = await MetaverseModel.find({}).limit(limit).sort({ createdAt: -1 });
-
   try {
+    let limit = request.query.limit
+    const category = await MetaverseModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
@@ -1026,10 +1012,9 @@ app.get("/get_MetaverseNews/:slug", async (request, response) => {
   }
 });
 app.get("/get_MetaverseNews/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await MetaverseModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await MetaverseModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1095,9 +1080,8 @@ app.post("/add_TopNews", async (request, response) => {
   }
 });
 app.get("/get_TopNews", async (request, response) => {
-  const data = await TopNewsModel.find({}).limit().sort({ createdAt: -1 });;
-
   try {
+    const data = await TopNewsModel.find({}).limit().sort({ createdAt: -1 });;
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1149,9 +1133,8 @@ app.post("/add_PopularNews", async (request, response) => {
   }
 });
 app.get("/get_PopularNews", async (request, response) => {
-  const data = await PopularNewsModel.find({}).limit().sort({ createdAt: -1 });;
-
   try {
+    const data = await PopularNewsModel.find({}).limit().sort({ createdAt: -1 });
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1217,20 +1200,18 @@ app.post("/add_Feature", async (request, response) => {
   }
 });
 app.get("/get_FeatureNews", async (request, response) => {
-  let limit = request.query.limit
-  const category = await FeatureModel.find({}).limit(limit).sort({ createdAt: -1 });
-
   try {
+    let limit = request.query.limit
+    const category = await FeatureModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_Feature/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await FeatureModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await FeatureModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1311,20 +1292,18 @@ app.post("/add_Opinion", async (request, response) => {
   }
 });
 app.get("/get_OpinionNews", async (request, response) => {
-  let limit = request.query.limit
-  const category = await OpinionModel.find({}).limit(limit).sort({ createdAt: -1 });
-
   try {
+    let limit = request.query.limit
+    const category = await OpinionModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_Opinion/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await OpinionModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await OpinionModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1405,20 +1384,18 @@ app.post("/add_Followup", async (request, response) => {
   }
 });
 app.get("/get_FollowupNews", async (request, response) => {
-  let limit = request.query.limit
-  const category = await FollowupModel.find({}).limit(limit).sort({ createdAt: -1 });
-
   try {
+    let limit = request.query.limit
+    const category = await FollowupModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_Followup/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await FollowupModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await FollowupModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1499,20 +1476,18 @@ app.post("/add_Markets", async (request, response) => {
   }
 });
 app.get("/get_MarketsNews", async (request, response) => {
-  let limit = request.query.limit
-  const category = await MarketsModel.find({}).limit(limit).sort({ createdAt: -1 });
-
   try {
+    let limit = request.query.limit
+    const category = await MarketsModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_Markets/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await MarketsModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await MarketsModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1593,28 +1568,26 @@ app.post("/add_DescriptionCoin", async (request, response) => {
   }
 });
 app.get("/get_DescriptionCoin", async (request, response) => {
-  const category = await DescriptionCoinModel.find({});
-
   try {
+    const category = await DescriptionCoinModel.find({});
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_DescriptionCoin/:category", async (request, response) => {
-  const { id } = request.params;
-  const data = await DescriptionCoinModel.find({ 'category': request.params.category });
   try {
+    const { id } = request.params;
+    const data = await DescriptionCoinModel.find({ 'category': request.params.category });
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_DescriptionCoinById/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await DescriptionCoinModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await DescriptionCoinModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1695,19 +1668,17 @@ app.post("/add_Learn", async (request, response) => {
   }
 });
 app.get("/get_LearnNews", async (request, response) => {
-  const category = await LearnModel.find({});
-
   try {
+    const category = await LearnModel.find({});
     response.send(category);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 app.get("/get_Learn/:id", async (request, response) => {
-  const { id } = request.params;
-  const data = await LearnModel.findById(id);
-
   try {
+    const { id } = request.params;
+    const data = await LearnModel.findById(id);
     response.send(data);
   } catch (error) {
     response.status(500).send(error);
@@ -1760,12 +1731,19 @@ app.delete("/delete_Learn/:id", async (request, response) => {
     response.status(500).send(error);
   }
 });
-///////////////////////////////////Learn///////////////////////////////////////////////////////////////////
+///////////////////////////////////Message & Email///////////////////////////////////////////////////////////////////
 app.post("/add_message", async (request, response) => {
-  console.log('207', request.body)
-  
-  const data = new MessageModel(request.body);
+   try {
+    const data = new MessageModel(request.body);
+    await data.save();
+    response.send(data);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+app.post("/add_email", async (request, response) => {
   try {
+    const data = new EmailModel(request.body);
     await data.save();
     response.send(data);
   } catch (error) {
@@ -1789,10 +1767,9 @@ app.get("/get_allCoin", async (request, response) => {
 app.get("/get_CoinById/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    console.log('1562',id)
-  coinstatsopenapi.auth(process.env.COINSTATSOPENAPI);
-  coinstatsopenapi.getCoinById({coinId: id})
-  .then(({ data }) =>{
+    coinstatsopenapi.auth(process.env.COINSTATSOPENAPI);
+    coinstatsopenapi.getCoinById({coinId: id})
+   .then(({ data }) =>{
     response.send(data);
   })
   .catch(err => console.error(err));
@@ -1803,9 +1780,8 @@ app.get("/get_CoinById/:id", async (request, response) => {
 app.get("/get_CoinAllMarkets/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    console.log('1562',id)
-  coinstatsopenapi.auth(process.env.COINSTATSOPENAPI);
-  coinstatsopenapi.getCoinById({coinId: id})
+    coinstatsopenapi.auth(process.env.COINSTATSOPENAPI);
+    coinstatsopenapi.getCoinById({coinId: id})
   .then(({ data }) =>{
     response.send(data);
   })
@@ -1817,9 +1793,8 @@ app.get("/get_CoinAllMarkets/:id", async (request, response) => {
 app.get("/get_CoinChart/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    console.log('1562',id)
-  coinstatsopenapi.auth(process.env.COINSTATSOPENAPI);
-  coinstatsopenapi.getCoinChartById({period: 'all', coinId: id})
+    coinstatsopenapi.auth(process.env.COINSTATSOPENAPI);
+    coinstatsopenapi.getCoinChartById({period: 'all', coinId: id})
   .then(({ data }) =>{
     response.send(data);
   })

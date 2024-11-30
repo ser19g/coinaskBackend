@@ -17,6 +17,7 @@
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-rate-limit": "^7.4.1",
     "mailjet-sendemail": "^1.1.4",
     "mongoosastic": "^5.0.0",
     "mongoose": "^6.12.6",
