@@ -1743,6 +1743,7 @@ app.post("/add_message", async (request, response) => {
 });
 app.post("/add_email", async (request, response) => {
   try {
+    console.log(request.body)
     const data = new EmailModel(request.body);
     await data.save();
     response.send(data);
