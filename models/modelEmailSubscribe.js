@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
 var convert = require('cyrillic-to-latin')
 
+function validator (v) {
+  return v.length < 50 && v.length > 5;
+};
+
 
 // model MainCategory
 const EmailSchema = new mongoose.Schema({
- email:{type:String},
+ email:{type:String,validate: [validator, 'my error type']},
 },{ timestamps: true },)
 
 if(this.title){

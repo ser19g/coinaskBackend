@@ -1208,6 +1208,17 @@ app.get("/get_FeatureNews", async (request, response) => {
     response.status(500).send(error);
   }
 });
+app.get("/get_FeatureNews/:slug", async (request, response) => {
+  
+  try {
+    const { slug } = request.params;
+    const data = await FeatureModel.findOne({slug:slug});
+    console.log(data)
+    response.send(data);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
 app.get("/get_Feature/:id", async (request, response) => {
   try {
     const { id } = request.params;
@@ -1296,6 +1307,17 @@ app.get("/get_OpinionNews", async (request, response) => {
     let limit = request.query.limit
     const category = await OpinionModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+app.get("/get_OpinionNews/:slug", async (request, response) => {
+  
+  try {
+    const { slug } = request.params;
+    const data = await OpinionModel.findOne({slug:slug});
+    console.log(data)
+    response.send(data);
   } catch (error) {
     response.status(500).send(error);
   }
@@ -1392,6 +1414,17 @@ app.get("/get_FollowupNews", async (request, response) => {
     response.status(500).send(error);
   }
 });
+app.get("/get_FollowupNews/:slug", async (request, response) => {
+  
+  try {
+    const { slug } = request.params;
+    const data = await FollowupModel.findOne({slug:slug});
+    console.log(data)
+    response.send(data);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
 app.get("/get_Followup/:id", async (request, response) => {
   try {
     const { id } = request.params;
@@ -1480,6 +1513,17 @@ app.get("/get_MarketsNews", async (request, response) => {
     let limit = request.query.limit
     const category = await MarketsModel.find({}).limit(limit).sort({ createdAt: -1 });
     response.send(category);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+app.get("/get_MarketsNews/:slug", async (request, response) => {
+  
+  try {
+    const { slug } = request.params;
+    const data = await MarketsModel.findOne({slug:slug});
+    console.log(data)
+    response.send(data);
   } catch (error) {
     response.status(500).send(error);
   }
