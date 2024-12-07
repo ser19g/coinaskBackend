@@ -1719,6 +1719,17 @@ app.get("/get_LearnNews", async (request, response) => {
     response.status(500).send(error);
   }
 });
+app.get("/get_LearnNews/:slug", async (request, response) => {
+  
+  try {
+    const { slug } = request.params;
+    const data = await LearnModel.findOne({slug:slug});
+    console.log(data)
+    response.send(data);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
 app.get("/get_Learn/:id", async (request, response) => {
   try {
     const { id } = request.params;
