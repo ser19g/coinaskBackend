@@ -29,7 +29,7 @@ const MessageModel = require("./models/modelMessage");
 const EmailModel = require("./models/modelEmailSubscribe");
 const WorldNewsModel = require("./models/modelWorldNews");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const mailjetService = require("./mailjetService")
+// const mailjetService = require("./mailjetService")
 var mongoose_delete = require('mongoose-delete');
 const coinstatsopenapi = require('@api/coinstatsopenapi');
 // sgMail.setApiKey(process.env.SENDGRID_API_KEY)
