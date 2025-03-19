@@ -1835,7 +1835,7 @@ app.post("/add_email", async (request, response) => {
 ///////////////////////////////////////// crypto data api //////////////////////////////////////////////
 app.get("/get_allCoin", async (request, response) => {
   try {
-  coinstatsopenapi.auth(process.env.COINSTATSOPENAPI);
+  coinstatsopenapi.auth(`KZL5SaF6xulyXIRY7UrdS7kvD33y6dC4008F64R0PXE=`);
   coinstatsopenapi.getCoins()
   .then(({ data }) =>{
     response.send(data);
