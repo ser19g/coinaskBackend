@@ -27,6 +27,7 @@ const PopularNewsModel = require("./models/modelPopularNews");
 const DescriptionCoinModel = require("./models/modelDescriptionCoin");
 const MessageModel = require("./models/modelMessage");
 const EmailModel = require("./models/modelEmailSubscribe");
+const WorldNewsModel = require("./models/modelWorldNews");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const mailjetService = require("./mailjetService")
 var mongoose_delete = require('mongoose-delete');
@@ -36,10 +37,10 @@ const coinstatsopenapi = require('@api/coinstatsopenapi');
 const fs = require('fs');
 const app = express();
 const mongoose = require("mongoose");
-
+const apicache  = require('apicache')
 const { Console } = require("console");
-
-
+const { SitemapStream, streamToPromise } = require( 'sitemap' )
+let cache = apicache.middleware
 // var cors = require('cors')
 
 // var corsOptions = { 
@@ -71,6 +72,30 @@ app.get("/delete_data", async (req, res) => {
   //     }
   //     response.end();
   // });
+});
+app.get('/sitemap.xml', cache('1 hour'), (req, res) => {
+  res.header('Content-Type', 'application/xml');
+
+  try {
+      const smStream = new SitemapStream({ hostname: 'https://coinask.info' });
+
+      (async () => {
+          const routes = ['feature','opinion','follow-up','markets','learn','learn','coincap'];
+
+          for (const route of routes) {
+              smStream.write(route);
+          }
+
+          smStream.end();
+
+          smStream.pipe(res).on('error', (e) => {
+              throw e;
+          });
+      })();
+  } catch (e) {
+      console.error(e);
+      res.status(500).end();
+  }
 });
 //////////////////////////////////send mail/////////////////////////////////////////////////////////////////////////////
 // app.post("/send-mailjet", async (req, res) => {
@@ -1933,6 +1958,133 @@ app.delete("/delete_email/:email", async (request, response) => {
   const clientEmail = await ClientEmailModel.deleteMany({ 'email': request.params.email });
   try {
     response.send(clientEmail);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+///////////////////////////////////WorldNews///////////////////////////////////////////////////////////////////
+app.post("/add_WorldNews", async (request, response) => {
+  try {
+    if(request.body.top){
+      const top = new TopNewsModel(request.body);
+      try {
+        await top.save();
+      } catch (error) {
+        response.status(500).send(error);
+      }
+    }
+    if(request.body.popular){
+      const popular = new PopularNewsModel(request.body);
+      try {
+        await popular.save();
+      } catch (error) {
+        response.status(500).send(error);
+      }
+    }
+    const data = new WorldNewsModel(request.body);
+    await data.save();
+    response.send(data);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+app.get("/get_WorldNews", async (request, response) => {
+  
+  try {
+    let limit = request.query.limit
+    const category = await WorldNewsModel.find({}).limit(limit).sort({ createdAt: -1 });
+    response.send(category);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+app.get("/get_WorldNews/:slug", async (request, response) => {
+  try {
+    const { slug } = request.params;
+    const data = await WorldNewsModel.findOne({slug:slug});
+    response.send(data);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+app.get("/get_WorldNewsById/:id", async (request, response) => {
+  try {
+    const { id } = request.params;
+    const data = await WorldNewsModel.findById(id);
+    response.send(data);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+app.put("/update_WorldNews/:id", async (request, response) => {
+  const { id } = request.params;
+
+  console.log('254', id, request.body)
+  // if(request.body.top){
+  //   const top = new TopNewsModel.findByIdAndUpdate(id,
+  //     {
+  //       $set: request.body
+  //     }
+
+  //     , { new: true });
+  //   try {
+  //     await top.save();
+  //   } catch (error) {
+  //     response.status(500).send(error);
+  //   }
+  // }
+  // if(request.body.popular){
+  //   const popular = new PopularNewsModel.findByIdAndUpdate(id,
+  //     {
+  //       $set: request.body
+  //     }
+
+  //     , { new: true });
+  //   try {
+  //     await popular.save();
+  //   } catch (error) {
+  //     response.status(500).send(error);
+  //   }
+  // }
+
+  try {
+    const data = await WorldNewsModel.findByIdAndUpdate(id,
+      {
+        $set: request.body
+      }
+
+      , { new: true });//respons update data
+    //response.send(product);
+    response.json(data);
+  }
+  catch (e) {
+    response.status(500).send(e);
+  }
+});
+app.put("/update_WorldNewsByTitle/:title", async (request, response) => {
+  const { title } = request.params;
+
+  console.log('299', title, request.body)
+   try {
+    const data = await WorldNewsModel.updateOne({title:title},
+      {
+        $set: request.body
+      }
+
+      , { new: true });//respons update data
+    //response.send(product);
+    response.json(data);
+  }
+  catch (e) {
+    response.status(500).send(e);
+  }
+});
+app.delete("/delete_WorldNews/:id", async (request, response) => {
+  try {
+    const processor = await WorldNewsModel.findByIdAndDelete(request.params.id);
+
+    if (!processor) response.status(404).send("No item found");
+    response.status(200).send();
   } catch (error) {
     response.status(500).send(error);
   }
