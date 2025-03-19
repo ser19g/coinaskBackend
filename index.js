@@ -34,9 +34,9 @@ app.use(Router);
 // app.use(function(req, res, next) {
 //   next(createError(404));
 // });
-console.log(process.env.MONGO_URI)
+
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(`mongodb+srv://coinaskinfo:marmon30@cluster0.zogsi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`, {
 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
